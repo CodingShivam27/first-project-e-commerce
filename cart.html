@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart page</title>
+    <style>
+      #navbar {
+        display: flex;
+        justify-content: space-around;
+        background-color: teal;
+        padding: 10px;
+      }
+      a {
+        text-decoration: none;
+      }
+      #navbar a:hover {
+        color: white;
+      }
+      #navbar a {
+        cursor: pointer;
+      }
+      #main{
+          display:grid;
+          width: 95%;
+          grid-template-columns: repeat(4,1fr);
+          gap:20px;
+          margin:auto
+      }
+      #main>div{
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+      }
+      #gg{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+      }
+      #price{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width:35%;
+      }
+      h3{
+          display:inline-block;
+      }
+      
+      button{
+          border:1px solit ;
+          width:100px;
+          height: 40px;
+      }
+      button:hover{
+          background-color: blue;
+          color:white;
+          border:none;
+          border-radius: 5%;
+      }
+      h1{
+          text-align: center;
+          background-color: yellow ;
+      }
+      body{
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+      #cart{
+        display: flex;
+        flex-flow:row-reverse;
+        height: 30px;
+      }
+      #cart>button{
+        margin-right: 20px;
+        height: 30px;
+        width: 75px;
+      }
+      h4{
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+      
+    <div id="navbar">
+        <div><a href="index.html">Home</a></div>
+      <div><a href="men.html">Men</a></div>
+      <div><a href="women.html">Women</a></div>
+      <div><a href="signup.html">Signup</a></div>
+      <div><a href="login.html">Login</a></div>
+    </div>
+    <div id="cart" >
+      
+      <h4 id="name" ></h4>
+      <button id="cO" >CheckOut</button>
+    </div>
+    <h1>YOU'R WISH LIST</h1>
+    <p id="gg"></p>
+    <div id="main">
+    </div>
+    
+  </body>
+</html>
+<script>
+    var name="Hello "+JSON.parse(localStorage.getItem("name"))||"";
+    document.querySelector("#name").innerText=name;
+    var item=JSON.parse(localStorage.getItem("cartItem"));
+    var sum=0,c=0;
+    item.map(function(ele,index){
+        var box=document.createElement("div");
+        var img=document.createElement("img");
+        img.src=ele.image_url;
+        
+        var para=document.createElement("p");
+        para.innerText=ele.name;
+        
+        var pricebox=document.createElement("div");
+        pricebox.setAttribute("id","gg");
+        
+        var price=document.createElement("h3");
+        price.innerText=ele.price;
+        
+        var strikedoffprice=document.createElement("del");
+        strikedoffprice.innerText=ele.strikedoffprice;
+        
+        var cartbutton=document.createElement("button");
+        cartbutton.innerText="Remove";
+        cartbutton.addEventListener("click",function(){
+          remove(ele,index);
+        })
+        c++;
+        sum+=ele.price;
+        
+        //console.log(ele)
+        
+        var pricediv=document.createElement("div");
+        pricediv.setAttribute("id","price");
+        
+        pricediv.append(price,strikedoffprice);
+        
+        pricebox.append(pricediv,cartbutton);
+  
+        box.append(img,para,pricebox);
+  
+        document.querySelector("#main").append(box);
+  
+    })
+    console.log(sum,c)
+    //var sum=0
+    document.querySelector("#gg").innerText="You have "+c+" items in your wish list and total amount is Rs "+sum||"";
+    if (sum!=0){
+      document.querySelector("#cO").addEventListener("click",checkO);
+      function checkO(){
+        window.location.href="checkout.html";
+      }
+    }
+
+    function remove(ele,index){
+        item.splice(index,1);
+        console.log(index);
+        var sum=0;
+        sum=sum+ele.price;
+        console.log()
+        
+        localStorage.setItem("cartItem",JSON.stringify(item));
+        window.location.reload();
+    }
+</script>

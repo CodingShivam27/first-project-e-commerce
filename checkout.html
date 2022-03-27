@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CheckOut Page</title>
+    <style>
+      #navbar {
+        display: flex;
+        justify-content: space-around;
+        background-color: teal;
+        padding: 10px;
+      }
+      a {
+        text-decoration: none;
+      }
+      #navbar a:hover {
+        color: white;
+      }
+      #navbar a {
+        cursor: pointer;
+      }
+      #main{
+          display:grid;
+          width: 95%;
+          grid-template-columns: repeat(4,1fr);
+          gap:20px;
+          margin:auto
+      }
+      #main>div{
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+      }
+      #gg{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+      }
+      #price{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width:35%;
+      }
+      h3{
+          display:inline-block;
+      }
+      
+      button{
+          border:1px solit ;
+          width:100px;
+          height: 40px;
+      }
+      button:hover{
+          background-color: blue;
+          color:white;
+          border:none;
+          border-radius: 5%;
+      }
+      h1{
+          text-align: center;
+          background-color: yellow ;
+      }
+      body{
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+      
+      #cart{
+        display: flex;
+        flex-flow:row-reverse;
+        height: 30px;
+      }
+      #cart>button{
+        margin-right: 20px;
+        height: 30px;
+        width: 60px;
+      }
+      h4{
+        margin-top: 10px;
+      }
+      #checkOutBox{
+          width:30%;
+          margin:auto;
+          display: flex;
+          border:1px solid red;
+          justify-content: center;
+          align-items: center;
+      }
+      
+    </style>
+  </head>
+  <body>
+      
+    <div id="navbar">
+        <div><a href="index.html">Home</a></div>
+      <div><a href="men.html">Men</a></div>
+      <div><a href="women.html">Women</a></div>
+      <div><a href="signup.html">Signup</a></div>
+      <div><a href="login.html">Login</a></div>
+    </div>
+    <div id="cart" >
+      
+      <h4 id="name" ></h4>
+
+    </div>
+    
+    <!-- <h1>WOMEN'S FASHION ONLY</h1> -->
+    <div id="main">
+    </div>
+    <div id="checkOutBox" >
+        <form>
+            <h2>CARD DETAILS</h2>
+            <input placeholder="enter card number" type="number" id="card" />
+            <br>
+            <input placeholder="enter cvv" type="number" id="cvv" />
+            <br>
+            <input placeholder="enter card valid date" type="date" id="date" />
+            <br>
+            <input type="submit" />
+        </form>
+    </div>
+    
+  </body>
+</html>
+
+<script>
+    var name="Hello "+JSON.parse(localStorage.getItem("name"))||"";
+    document.querySelector("#name").innerText=name;
+</script>

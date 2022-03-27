@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <style>
+      #navbar {
+        display: flex;
+        justify-content: space-around;
+        background-color: teal;
+        padding: 10px;
+      }
+      a {
+        text-decoration: none;
+      }
+      #navbar a:hover {
+        color: white;
+      }
+      #navbar a {
+        cursor: pointer;
+      }
+      div>h1{
+        text-align: center;
+      }
+      #main{
+        width:40%;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        margin:auto;
+        margin-top: 30px;
+        display:grid;
+        justify-content: center;
+
+      }
+      input{
+        height:20px;
+        width:auto
+      }
+      #submit{
+        margin-top: 20px;
+        height:30px;
+        width:50%;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="navbar">
+        <div><a href="index.html">Home</a></div>
+      <div><a href="men.html">Men</a></div>
+      <div><a href="women.html">Women</a></div>
+      <div><a href="signup.html">Signup</a></div>
+      <div><a href="login.html">Login</a></div>
+    </div>
+    <div id="main" >
+      <h1>LOGIN PAGE</h1>
+      <form>
+        <h4>EMAIL</h4>
+        <input placeholder="enter email" type="email" id="email" />
+        <h4>PASSWERD</h4>
+        <input placeholder="enter password" type="password" id="password" />
+        <br>
+        <input id="submit" type="submit" value="sumbit" />
+      </form>
+    </div>
+  </body>
+</html>
+
+<script>
+  document.querySelector("form").addEventListener("submit",login);
+  var userData=JSON.parse(localStorage.getItem("userData"))
+  
+  function login(){
+    event.preventDefault();
+    //console.log(userData);
+    var enteredEmail=document.querySelector("#email").value;
+    var enteredpass=document.querySelector("#password").value;
+    var userName;
+    var c=0;
+    //console.log(enteredEmail);
+    //console.log(enteredpass);
+    for (var x=0;x<userData.length;x++){
+      //console.log(userData[x].email);
+      //console.log(userData[x].password);
+      if (userData[x].email==enteredEmail&& userData[x].password==Number(enteredpass)){
+        alert("login succesfull");
+        userName=userData[x].name;
+        localStorage.setItem("name",JSON.stringify(userName));
+        c++;
+        window.location.href="index.html"
+        break;
+      }
+      
+    }
+    if(c!=1){
+      alert("wrong email or password");
+    }
+  }
+</script>
